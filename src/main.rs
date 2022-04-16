@@ -1,7 +1,7 @@
 use std::error::Error;
 
 use tensorflow as tf;
-use tf::eager::{self, raw_ops, ReadonlyTensor, ToTensorHandle};
+use tf::eager::{self, raw_ops, ReadonlyTensor, TensorHandle, ToTensorHandle};
 
 fn main() -> Result<(), Box<dyn Error>> {
     // eager API実行のコンテキストを作る。GPUの使用や、デバイスを指定することができる。
@@ -9,9 +9,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     let ctx = eager::Context::new(opts)?;
 
     // eager APIを使って画像を読み込み
-    let fname = "sample/macaque.jpg".to_handle(&ctx)?;
-    let buf = raw_ops::read_file(&ctx, &fname)?;
-    let img = raw_ops::decode_image(&ctx, &buf)?;
+    let fname: TensorHandle = "sample/macaque.jpg".to_handle(&ctx)?;
+    let buf: TensorHandle = raw_ops::read_file(&ctx, &fname)?;
+    let img: TensorHandle = raw_ops::decode_image(&ctx, &buf)?;
 
     // 画像サイズを確認する。
     let height = img.dim(0)?;
