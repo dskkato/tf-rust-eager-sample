@@ -41,8 +41,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     // Tensorの中身にアクセスできるように、TensorHandleからTensorに戻す
     // 今の実装では、ReadonlyTensorを経由してTensorに戻す必要がある。
-    let readonly_t: ReadonlyTensor<f32> = resized.resolve()?;
-    let t: Tensor<f32> = unsafe { readonly_t.into_tensor() };
+    let t: ReadonlyTensor<f32> = resized.resolve()?;
+    // let t: Tensor<f32> = unsafe { t.into_tensor() };
 
     // resize後の1つ目のピクセルについて、
     // Pythonで計算した結果と比較する
