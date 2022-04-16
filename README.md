@@ -12,6 +12,6 @@ cargo run --example read_image_resize
 ```
 python3 -m venv .venv
 # activate env
-pip3 install tensorflow
+pip3 install -r requirements.txt
 python3 python/main.py
 ```
