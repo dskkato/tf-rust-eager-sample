@@ -2,6 +2,7 @@ use std::error::Error;
 
 use tensorflow as tf;
 use tf::eager::{self, raw_ops, ReadonlyTensor, TensorHandle, ToTensorHandle};
+use tf::Tensor;
 
 fn main() -> Result<(), Box<dyn Error>> {
     // eager API実行のコンテキストを作る。GPUの使用や、デバイスを指定することができる。
@@ -41,7 +42,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Tensorの中身にアクセスできるように、TensorHandleからTensorに戻す
     // 今の実装では、ReadonlyTensorを経由してTensorに戻す必要がある。
     let readonly_t: ReadonlyTensor<f32> = resized.resolve()?;
-    let t = unsafe { readonly_t.into_tensor() };
+    let t: Tensor<f32> = unsafe { readonly_t.into_tensor() };
 
     // resize後の1つ目のピクセルについて、
     // Pythonで計算した結果と比較する
