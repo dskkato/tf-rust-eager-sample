@@ -1,0 +1,10 @@
+[package]
+name = "tf-rust-eager-sample"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[dependencies.tensorflow]
+version = "0.18.0"
+features = ["eager"]
